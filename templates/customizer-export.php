@@ -134,7 +134,7 @@
 
       window.fetch(importForm.action, {
           method: importForm.method,
-          <? /*
+          <?php /*
             with explicit headers, fetch does not set the boundary correctly
             // headers: {
             //     'content-type': 'multipart/form-data',
