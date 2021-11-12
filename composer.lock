@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "dff30730801659af6433f8a5dfc73abb",
+    "packages": [
+        {
+            "name": "gebruederheitz/wp-simple-rest",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gebruederheitz/wp-simple-rest.git",
+                "reference": "4f11b2ab72f362d3ed85273f9d498f38745f0d07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gebruederheitz/wp-simple-rest/zipball/4f11b2ab72f362d3ed85273f9d498f38745f0d07",
+                "reference": "4f11b2ab72f362d3ed85273f9d498f38745f0d07",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gebruederheitz\\Traits\\Rest\\": "Gebruederheitz/Traits/Rest/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Maros",
+                    "email": "andreas.maros@gebruederheitz.de"
+                }
+            ],
+            "description": "A trait to help you set up REST endpoints in Wordpress.",
+            "time": "2021-07-13T17:13:51+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": "^7.3",
+        "ext-json": "*"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}
