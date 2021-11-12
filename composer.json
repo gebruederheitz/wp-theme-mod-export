@@ -17,6 +17,6 @@
     "require": {
 	    "php": "^7.3",
         "ext-json": "*",
-        "gebruederheitz/wp-simple-rest": "^1.0"
+        "gebruederheitz/wp-simple-rest": "^2.0"
     }
 }

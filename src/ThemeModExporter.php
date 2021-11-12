@@ -2,7 +2,8 @@
 
 namespace Gebruederheitz\Wordpress;
 
-use Gebruederheitz\Traits\Rest\withREST;
+use Gebruederheitz\Wordpress\Rest\RestRoute;
+use Gebruederheitz\Wordpress\Rest\Traits\withREST;
 use WP_REST_Request;
 
 class ThemeModExporter
@@ -104,29 +105,20 @@ class ThemeModExporter
     protected static function getRestRoutes(): array
     {
         return [
-            [
-                'name' => 'Export the current theme_mods (customizer settings)',
-                'route' => '/theme-mods/export',
-                'config' => [
-                    'methods' => 'GET',
-                    'callback' => [self::class, 'exportCurrentThemeMods'],
-                    'permission_callback' => function () {
-                        return current_user_can('edit_posts');
-                    },
-                    'args' => [],
-                ],
-            ],
-            [
-                'name' => 'Import JSON to override the current theme mods (customizer settings)',
-                'route' => '/theme-mods/import',
-                'config' => [
-                    'methods' => 'POST',
-                    'callback' => [self::class, 'importCurrentThemeMods'],
-                    'permission_callback' => function () {
-                        return current_user_can('manage_options');
-                    },
-                ],
-            ],
+            RestRoute::create(
+                'Export the current theme_mods (customizer settings)',
+                '/theme-mods/export'
+            )
+                ->setCallback([self::class, 'exportCurrentThemeMods'])
+                ->allowOnlyEditors(),
+            RestRoute::create(
+                'Import JSON to override the current theme mods (customizer settings)',
+                '/theme-mods/import'
+            )
+                ->setCallback([self::class, 'importCurrentThemeMods'])
+                ->setPermissionCallback(function () {
+                    return current_user_can('manage_options');
+                }),
         ];
     }
 

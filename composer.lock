@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dff30730801659af6433f8a5dfc73abb",
+    "content-hash": "956651cfe2da4f71829047c35835cbc3",
     "packages": [
         {
             "name": "gebruederheitz/wp-simple-rest",
-            "version": "v1.0.2",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gebruederheitz/wp-simple-rest.git",
-                "reference": "4f11b2ab72f362d3ed85273f9d498f38745f0d07"
+                "reference": "41d5db9e719eb8f7ac2b04dfc81bbd433e4d4e29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gebruederheitz/wp-simple-rest/zipball/4f11b2ab72f362d3ed85273f9d498f38745f0d07",
-                "reference": "4f11b2ab72f362d3ed85273f9d498f38745f0d07",
+                "url": "https://api.github.com/repos/gebruederheitz/wp-simple-rest/zipball/41d5db9e719eb8f7ac2b04dfc81bbd433e4d4e29",
+                "reference": "41d5db9e719eb8f7ac2b04dfc81bbd433e4d4e29",
                 "shasum": ""
             },
             "require": {
@@ -26,7 +26,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Gebruederheitz\\Traits\\Rest\\": "Gebruederheitz/Traits/Rest/"
+                    "Gebruederheitz\\Wordpress\\Rest\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -40,7 +40,7 @@
                 }
             ],
             "description": "A trait to help you set up REST endpoints in Wordpress.",
-            "time": "2021-07-13T17:13:51+00:00"
+            "time": "2021-11-12T18:02:08+00:00"
         }
     ],
     "packages-dev": [],
