@@ -78,14 +78,12 @@ class ThemeModExporter
             // Only process options with a "ghwp" prefix
             if (substr($name, 0, 4) !== 'ghwp') continue;
 
-            $old_value = isset( $mods[ $name ] ) ? $mods[ $name ] : false;
+            $old_value = $mods[$name] ?? null;
             // Nothing to change
             if ($old_value === $value) continue;
 
-//            error_log('Updating theme_mod "'. $name . '" with value "' . json_encode($value) . '" replacing "'.$old_value.'"...');
-
             $hasUpdates = true;
-            $mods[ $name ] = apply_filters( "pre_set_theme_mod_{$name}", $value, $old_value );
+            $mods[$name] = apply_filters( "pre_set_theme_mod_$name", $value, $old_value );
         }
 
         if ($hasUpdates) {
@@ -115,6 +113,7 @@ class ThemeModExporter
                 'Import JSON to override the current theme mods (customizer settings)',
                 '/theme-mods/import'
             )
+                ->setMethods('POST')
                 ->setCallback([self::class, 'importCurrentThemeMods'])
                 ->setPermissionCallback(function () {
                     return current_user_can('manage_options');
