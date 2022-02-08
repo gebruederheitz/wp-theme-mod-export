@@ -1,6 +1,6 @@
 {
   "name": "@gebruederheitz/wp-theme-mod-export-util",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Utilities for the gebruederheitz/wp-theme-mod-export PHP composer package",
   "main": "",
   "engines": {
