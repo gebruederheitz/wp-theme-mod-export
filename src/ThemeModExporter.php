@@ -18,9 +18,6 @@ class ThemeModExporter
 
     protected const MENU_TITLE_NAMESPACE = 'ghwp';
 
-    protected $title = 'Customizer-Einstellungen Exportieren und Importieren';
-
-
     public static function init()
     {
         self::initRestApi();
@@ -48,56 +45,71 @@ class ThemeModExporter
             __(static::MENU_TITLE, static::MENU_TITLE_NAMESPACE),
             'edit_posts',
             static::MENU_SLUG,
-            [self::class, 'renderSubmenu']
+            [self::class, 'renderSubmenu'],
         );
     }
 
-    public static function exportCurrentThemeMods(WP_REST_Request $request): array
-    {
+    public static function exportCurrentThemeMods(
+        WP_REST_Request $request
+    ): array {
         $mods = get_theme_mods();
         $string = json_encode($mods);
 
         return [$string];
     }
 
-    public static function importCurrentThemeMods(WP_REST_Request $request): array
-    {
+    public static function importCurrentThemeMods(
+        WP_REST_Request $request
+    ): array {
         $files = $request->get_file_params();
-        if (empty($files['file']['tmp_name'])) throw new \Exception('no file');
+        if (empty($files['file']['tmp_name'])) {
+            throw new \Exception('no file');
+        }
 
-        $string = file_get_contents($files["file"]['tmp_name']);
-        if (empty($string)) throw new \Exception('invalid file');
+        $string = file_get_contents($files['file']['tmp_name']);
+        if (empty($string)) {
+            throw new \Exception('invalid file');
+        }
 
         $data = json_decode($string, true);
-        if (empty($data) || !is_array($data)) throw new \Exception('invalid file contents');
+        if (empty($data) || !is_array($data)) {
+            throw new \Exception('invalid file contents');
+        }
 
         $mods = get_theme_mods();
         $hasUpdates = false;
 
         foreach ($data as $name => $value) {
             // Only process options with a "ghwp" prefix
-            if (substr($name, 0, 4) !== 'ghwp') continue;
+            if (substr($name, 0, 4) !== 'ghwp') {
+                continue;
+            }
 
             $old_value = $mods[$name] ?? null;
             // Nothing to change
-            if ($old_value === $value) continue;
+            if ($old_value === $value) {
+                continue;
+            }
 
             $hasUpdates = true;
-            $mods[$name] = apply_filters( "pre_set_theme_mod_$name", $value, $old_value );
+            /* @phpstan-ignore-next-line */
+            $mods[$name] = apply_filters(
+                "pre_set_theme_mod_$name",
+                $value,
+                $old_value,
+            );
         }
 
         if ($hasUpdates) {
-            $theme  = get_option('stylesheet');
+            $theme = get_option('stylesheet');
             $result = update_option("theme_mods_$theme", $mods);
 
-            if ( ! $result) {
+            if (!$result) {
                 throw new \Exception('Settings could not be set');
             }
         }
 
-        return [
-            'Done.'
-        ];
+        return ['Done.'];
     }
 
     protected static function getRestRoutes(): array
@@ -105,13 +117,13 @@ class ThemeModExporter
         return [
             RestRoute::create(
                 'Export the current theme_mods (customizer settings)',
-                '/theme-mods/export'
+                '/theme-mods/export',
             )
                 ->setCallback([self::class, 'exportCurrentThemeMods'])
                 ->allowOnlyEditors(),
             RestRoute::create(
                 'Import JSON to override the current theme mods (customizer settings)',
-                '/theme-mods/import'
+                '/theme-mods/import',
             )
                 ->setMethods('POST')
                 ->setCallback([self::class, 'importCurrentThemeMods'])
